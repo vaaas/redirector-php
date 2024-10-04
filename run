@@ -1,0 +1,6 @@
+#!/bin/sh
+
+case $1 in
+  build)  . scripts/build.sh ;;
+  deploy) . scripts/deploy.sh ;;
+esac;

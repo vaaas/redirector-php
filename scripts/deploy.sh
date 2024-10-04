@@ -3,8 +3,21 @@
 user=root
 domain=sexualise.it
 auth=$user@$domain
-container=/var/lib/machines/apps
-appdir=$container/opt/redirector
 
-ssh $auth mkdir -p $appdir
-scp -r src/* root@sexualise.it:$appdir
+echo 'uploading container'
+scp build/redirector.squashfs $auth:/var/lib/machines
+
+echo 'uploading systemd service'
+scp etc/redirector.service $auth:/etc/systemd/system
+
+echo 'uploading caddyfile'
+scp etc/redirector.caddy $auth:/etc/caddy
+
+echo 'reloading systemd daemons'
+ssh $auth systemctl daemon-reload
+
+echo 'restarting container'
+ssh $auth systemctl restart redirector
+
+echo 'restarting caddy'
+ssh $auth systemctl restart caddy
