@@ -2,7 +2,7 @@ go.sexualise.it {
 	rewrite * /index.php
 	reverse_proxy 127.0.0.1:2000 {
 		transport fastcgi {
-			root /opt/redirector
+			root /app
 			split .php
 		}
 	}
