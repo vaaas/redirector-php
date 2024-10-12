@@ -2,10 +2,10 @@
 user=root
 domain=sexualise.it
 auth=$user@$domain
-pkg=`basename build/*deb`
+pkg=`basename *.deb`
 
 echo 'uploading package'
-scp build/$pkg $auth:/root/$pkg
+scp $pkg $auth:/root/$pkg
 
 echo 'installing'
 ssh $auth apt install /root/$pkg
