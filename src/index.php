@@ -11,21 +11,20 @@ function redirect_response(string $target): void {
 	die();
 }
 
-function strslice(string $str, int $start, int $end): string {
-	return substr($str, $start, $end - $start);
+function get_resource(string $url): string {
+	$end = strpos($url, '?');
+	if ($end === false) $end = strlen($url);
+	return substr($url, 1, $end - 1);
 }
 
-$links = include('links.php');
-
-if (!$links) plain_text_response(404, 'Not found');
-
 $url = $_SERVER['REQUEST_URI'];
+if ($url === '/')
+	plain_text_response(200, 'Hello, world!');
 
-/** @var int | null */
-$end = strpos($url, '?');
-if ($end === false) $end = strlen($url);
+$links = require('links.php');
+$resource = get_resource($url);
 
-$url = strslice($url, 1, $end);
-
-if (array_key_exists($url, $links)) redirect_response($links[$url]);
-else plain_text_response(404, 'Not found');
+if (array_key_exists($resource, $links))
+	redirect_response($links[$resource]);
+else
+	plain_text_response(404, 'Not found');
