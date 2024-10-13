@@ -1,7 +1,13 @@
 #!/bin/sh
-user=root
-domain=sexualise.it
-auth=$user@$domain
+if test -z "$USER"
+then USER=root
+fi
+
+if test -z "$DOMAIN"
+then DOMAIN=sexualise.it
+fi
+
+auth=$USER@$DOMAIN
 pkg=`basename *.deb`
 
 echo 'uploading package'

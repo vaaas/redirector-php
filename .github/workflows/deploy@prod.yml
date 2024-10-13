@@ -1,0 +1,43 @@
+name: '[PRODUCTION] deploy'
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: check out
+        uses: actions/checkout@v4
+      - name: install dependencies
+        shell: bash
+        run: |
+          sudo apt update
+          sudo apt install --yes curl openssh-client squashfs-tools
+      - name: build
+        shell: bash
+        run: sudo ./scripts/build.sh
+      - name: install secrets
+        shell: bash
+        env:
+          ID_RSA: ${{secrets.ID_RSA}}
+          KNOWN_HOSTS: ${{secrets.KNOWN_HOSTS}}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$ID_RSA" > ~/.ssh/id_rsa
+          echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 700 ~/.ssh
+          chmod 600 ~/.ssh/*
+      - name: deploy
+        shell: bash
+        env:
+          DOMAIN: ${{vars.DOMAIN}}
+          USER: ${{vars.USER}}
+        run: ./scripts/deploy.sh
