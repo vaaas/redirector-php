@@ -1,22 +1,5 @@
 #!/bin/sh
 
-container=redirector-php:builder
-
-build() {
-  echo starting build
-  docker run -it \
-    -v ./:/app \
-    $container \
-    /bin/sh -c 'chdir /app && ./scripts/build.sh'
-  echo done
-}
-
-make_builder() {
-  docker build -f Dockerfile.build -t $container .
-}
-
 case $1 in
-  make:builder) make_builder ;;
-  build)        build ;;
-  deploy)       . scripts/deploy.sh ;;
-esac;
+  dev) php -S localhost:8000 src/index.php
+esac
