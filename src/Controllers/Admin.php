@@ -2,9 +2,9 @@
 namespace Controllers;
 
 use AddLinkRequest;
-use AdminPanel;
+use Views\AdminPanel;
 use BasicAuth;
-use Http\Request;
+use Http\IRequest;
 use Http\Response;
 use Links;
 use ServiceLocator;
@@ -21,16 +21,16 @@ class Admin
         $this->links = ServiceLocator::get(Links::class);
     }
 
-    public function handle(Request $request): Response
+    public function handle(IRequest $request): Response
     {
         $this->auth->authorise($request);
-        return match ($request->method) {
+        return match ($request->method()) {
             "POST" => self::post($request),
             default => self::get(),
         };
     }
 
-    private function post(Request $request): Response
+    private function post(IRequest $request): Response
     {
         try {
             $dto = AddLinkRequest::fromRequest($request);

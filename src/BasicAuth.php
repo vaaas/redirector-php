@@ -1,7 +1,7 @@
 <?php
 
 use Errors\Unauthorized;
-use Http\Request;
+use Http\IRequest;
 
 class BasicAuth
 {
@@ -15,9 +15,9 @@ class BasicAuth
         );
     }
 
-    public function authorise(Request $request)
+    public function authorise(IRequest $request)
     {
-        $authorization = $request->headers["Authorization"];
+        $authorization = $request->header("Authorization");
         if (!$authorization) {
             throw new Unauthorized();
         }

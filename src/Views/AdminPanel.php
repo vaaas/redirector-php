@@ -1,4 +1,9 @@
 <?php
+namespace Views;
+
+use Links;
+use ServiceLocator;
+
 class AdminPanel extends View
 {
     /** @var array(string, string) $links */

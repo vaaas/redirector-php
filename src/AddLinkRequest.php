@@ -1,6 +1,6 @@
 <?php
 
-use Http\Request;
+use Http\IRequest;
 
 class AddLinkRequest
 {
@@ -10,7 +10,7 @@ class AddLinkRequest
     ) {
     }
 
-    public static function fromRequest(Request $request)
+    public static function fromRequest(IRequest $request)
     {
         $from = $request->post("from");
         $to = $request->post("to");

@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use Errors\NotFound;
-use Http\Request;
+use Http\IRequest;
 use Http\Response;
 use Links;
 use ServiceLocator;
@@ -15,9 +15,9 @@ class Redirect
         $this->links = ServiceLocator::get(Links::class);
     }
 
-    public function handle(Request $request): Response
+    public function handle(IRequest $request): Response
     {
-        $target = $this->links->get($request->resource);
+        $target = $this->links->get($request->resource());
         if (!$target) {
             throw new NotFound();
         }

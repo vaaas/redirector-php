@@ -1,15 +1,15 @@
 <?php
 
-use Http\Request;
+use Http\IRequest;
 use Http\Respondable;
 use Http\Response;
 
 class Router
 {
-    public static function route(Request $request): Response
+    public static function route(IRequest $request): Response
     {
         try {
-            return match ($request->resource) {
+            return match ($request->resource()) {
                 "" => ServiceLocator::get(Controllers\Admin::class)->handle(
                     $request
                 ),
