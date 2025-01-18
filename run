@@ -1,5 +1,17 @@
 #!/bin/sh
 
+tag=redirector-php
+
 case $1 in
-  dev) php -S localhost:8000 src/index.php
+  container:build)
+    podman build -t $tag -f Containerfile.dev .
+    ;;
+
+  container:dev)
+    podman run --volume ./:/opt/app -p 8000:8000 -i -t $tag /opt/app/run dev
+    ;;
+
+  dev)
+    php84 -S 0.0.0.0:8000 src/index.php
+    ;;
 esac
