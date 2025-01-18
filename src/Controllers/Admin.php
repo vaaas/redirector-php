@@ -7,35 +7,43 @@ use BasicAuth;
 use Http\Request;
 use Http\Response;
 use Links;
+use ServiceLocator;
 use Throwable;
 
 class Admin
 {
-    public static function handle(Request $request): Response
+    private BasicAuth $auth;
+    private Links $links;
+
+    public function __construct()
     {
-        BasicAuth::authorise($request);
+        $this->auth = ServiceLocator::get(BasicAuth::class);
+        $this->links = ServiceLocator::get(Links::class);
+    }
+
+    public function handle(Request $request): Response
+    {
+        $this->auth->authorise($request);
         return match ($request->method) {
             "POST" => self::post($request),
             default => self::get(),
         };
     }
 
-    private static function post(Request $request): Response
+    private function post(Request $request): Response
     {
-        $links = Links::load();
         try {
             $dto = AddLinkRequest::fromRequest($request);
-            $links->set($dto->from, $dto->to);
-            $links->save();
+            $this->links->set($dto->from, $dto->to);
+            $this->links->save();
         } catch (Throwable $error) {
             error_log($error->getMessage());
         }
-        return (new AdminPanel($links->entries))->response();
+        return (new AdminPanel())->response();
     }
 
-    private static function get(): Response
+    private function get(): Response
     {
-        $links = Links::load();
-        return (new AdminPanel($links->entries))->response();
+        return (new AdminPanel())->response();
     }
 }

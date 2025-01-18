@@ -1,6 +1,7 @@
 <?php
 
 use Http\Request;
+use Http\Respondable;
 use Http\Response;
 
 class Router
@@ -8,9 +9,13 @@ class Router
     public static function route(Request $request): Response
     {
         try {
-            return match ($request->uri) {
-                "/" => Controllers\Admin::handle($request),
-                default => Controllers\Redirect::handle($request),
+            return match ($request->resource) {
+                "" => ServiceLocator::get(Controllers\Admin::class)->handle(
+                    $request
+                ),
+                default => ServiceLocator::get(
+                    Controllers\Redirect::class
+                )->handle($request),
             };
         } catch (Throwable $error) {
             if ($error instanceof Respondable) {

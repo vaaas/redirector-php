@@ -3,86 +3,120 @@
     <head>
         <style>
             html {
-                font-family: sans-serif;
-                line-height: 1.5em;
+                font-family: monospace;
+                font-size: 16px;
             }
 
+            * { line-height: 1.5em; }
+
             h1 {
-                line-height: 1.5em;
+                margin: 0;
+                padding-bottom: 1em;
+                font-size: 1em;
             }
 
             body {
-                max-width: 700px;
+                padding: 1em;
+                max-width: 50em;
                 margin: auto;
             }
 
-            body > section + section {
-                border-top: 1px solid black;
+            input {
+                border: none;
+                border-bottom: 1px solid #aaa;
+                font-size: 1em;
+                width: 100%;
             }
 
-            form > .main {
-                display: flex;
-                justify-content: space-between;
-                gap: 1em;
+            input:focus {
+                outline: none;
+                background-color: #eef;
+                border-bottom-color: #88f;
             }
 
-            label {
-                display: flex;
-                gap: 1em;
+            button {
+                border: none;
+                background: none;
+                padding: 0;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 1em;
             }
 
-            form > footer {
-                text-align: right;
+            button.add {
+                color: #44f;
+            }
+
+            button.delete {
+                color: #f44;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            a {
+                color: #44f;
+            }
+
+            th {
+                font-weight: normal;
+                color: #484;
+            }
+
+            td + td {
+                padding-left: 1em;
+            }
+
+            tr + tr td {
+                padding-top: 1em;
             }
         </style>
     </head>
     <body>
         <h1>Redirector-php admin panel</h1>
 
-        <section>
-            <h2>Redirects</h2>
-            <?php if (count($this->links)): ?>
-                <table>
-                    <tr>
-                        <th>Resource</th>
-                        <th>Destination</th>
-                    </tr>
+        <table>
+            <tr>
+                <th>Resource</th>
+                <th>Destination</th>
+            </tr>
 
-                    <?php foreach ($this->links as $k => $v): ?>
-                        <tr>
-                            <td>
-                                <?= htmlspecialchars($k) ?>
-                            </td>
-                            <td>
-                                <a href="<?= htmlspecialchars(
-                                    $v
-                                ) ?>"><?= htmlspecialchars($v) ?></a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </table>
-            <?php else: ?>
-                <p>No redirects. Add some!</p>
-            <?php endif; ?>
-        </section>
+            <tr>
+                <form action="/?add" method="post">
+                    <td>
+                        <input name="from" type="text" placeholder="From"/>
+                    </td>
+                    <td>
+                        <input name="to" type="text" placeholder="To (url)"/>
+                    </td>
+                    <td>
+                        <button class="add" type="submit" name="action" value="add">
+                            Add
+                        </button>
+                    </td>
+                </form>
+            </tr>
 
-        <section>
-            <h2>Add redirect</h2>
-            <form action="/" method="post">
-                <div class='main'>
-                    <label>
-                        <span>From</span>
-                        <input name="from" type="text"/>
-                    </label>
-                    <label>
-                        <span>To</span>
-                        <input name="to" type="text"/>
-                    </label>
-                </div>
-                <footer>
-                    <button type="submit">Submit</button>
-                </footer>
-            </form>
-        </section>
+            <?php foreach ($this->links as $k => $v): ?>
+                <tr>
+                    <td>
+                        <?= htmlspecialchars($k) ?>
+                    </td>
+                    <td>
+                        <a href="<?= htmlspecialchars(
+                            $v
+                        ) ?>"><?= htmlspecialchars($v) ?></a>
+                    </td>
+                    <td>
+                        <form action="/?delete" method="post">
+                            <button class="delete" name="action" value="delete">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
     </body>
 </html>

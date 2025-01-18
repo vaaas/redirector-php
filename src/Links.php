@@ -25,7 +25,7 @@ class Links
         file_put_contents(self::$path, serialize($this->entries));
     }
 
-    public static function load(): self
+    public static function provider(): self
     {
         /** @var array(string, string) $links */
         $entries = unserialize(file_get_contents(self::$path)) ?: [];

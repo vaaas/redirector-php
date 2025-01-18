@@ -5,7 +5,17 @@ use Http\Request;
 
 class BasicAuth
 {
-    public static function authorise(Request $request)
+    private readonly string $expected;
+
+    public function __construct()
+    {
+        $config = ServiceLocator::get(Configuration::class);
+        $this->expected = base64_encode(
+            "{$config->authUsername}:{$config->authPassword}"
+        );
+    }
+
+    public function authorise(Request $request)
     {
         $authorization = $request->headers["Authorization"];
         if (!$authorization) {
@@ -15,16 +25,7 @@ class BasicAuth
             throw new Unauthorized();
         }
         $encoded = substr($authorization, 6);
-        if (!$encoded) {
-            throw new Unauthorized();
-        }
-        $decoded = base64_decode($encoded);
-        $parts = explode(":", $decoded);
-        if (count($parts) !== 2) {
-            throw new Unauthorized();
-        }
-        [$username, $password] = $parts;
-        if ($username !== "admin" || $password !== "password") {
+        if ($encoded !== $this->expected) {
             throw new Unauthorized();
         }
     }

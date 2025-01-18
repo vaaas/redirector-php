@@ -5,13 +5,19 @@ use Errors\NotFound;
 use Http\Request;
 use Http\Response;
 use Links;
+use ServiceLocator;
 
 class Redirect
 {
-    public static function handle(Request $request): Response
+    private readonly Links $links;
+    public function __construct()
     {
-        $links = Links::load();
-        $target = $links->get($request->resource);
+        $this->links = ServiceLocator::get(Links::class);
+    }
+
+    public function handle(Request $request): Response
+    {
+        $target = $this->links->get($request->resource);
         if (!$target) {
             throw new NotFound();
         }
