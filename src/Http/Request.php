@@ -33,4 +33,9 @@ class Request implements IRequest
     {
         return array_key_exists($k, $_POST) ? $_POST[$k] : null;
     }
+
+    public function query(string $k): ?string
+    {
+        return array_key_exists($k, $_GET) ? $_GET[$k] : null;
+    }
 }

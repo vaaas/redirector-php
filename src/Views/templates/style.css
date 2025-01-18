@@ -1,0 +1,95 @@
+* {
+    all: unset;
+}
+
+:root {
+    --bg: #050607;
+    --fg: #d6dae0;
+    --green: #7ba671;
+    --blue: #799fc5;
+    --yellow: #e8c26e;
+}
+
+head {
+    display: none;
+}
+
+table {
+    display: table;
+}
+
+tr {
+    display: table-row;
+}
+
+td,
+th {
+    display: table-cell;
+}
+
+html {
+    font-family: monospace;
+    font-size: 16px;
+    display: block;
+    line-height: 1.5rem;
+    color: var(--fg);
+    background-color: var(--bg);
+}
+
+body {
+    display: block;
+    max-width: 50rem;
+    margin: auto;
+    padding: 1rem;
+}
+
+h1 {
+    display: block;
+    padding-bottom: 1rem;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+a:focus {
+    font-weight: bold;
+}
+
+td + td,
+th + th {
+    padding-left: 1rem;
+}
+
+th {
+    color: var(--green);
+}
+
+button.add {
+    font-weight: bold;
+    color: var(--blue);
+}
+
+button.delete {
+    font-weight: bold;
+    color: var(--yellow);
+}
+
+button:focus,
+button:hover {
+    text-decoration: underline;
+}
+
+input[type="text"] {
+    background-color: #15171a;
+    border-bottom: 1px solid #7c8693;
+}
+
+input[type="text"]:focus {
+    background-color: #25292d;
+}

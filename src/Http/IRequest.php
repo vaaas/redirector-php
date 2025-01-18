@@ -13,4 +13,6 @@ interface IRequest
     public function method(): string;
 
     public function post(string $k): ?string;
+
+    public function query(string $k): ?string;
 }

@@ -20,6 +20,11 @@ class Links
         $this->entries[$from] = $to;
     }
 
+    public function delete(string $from): void
+    {
+        unset($this->entries[$from]);
+    }
+
     public function save(): void
     {
         file_put_contents(self::$path, serialize($this->entries));

@@ -1,8 +1,10 @@
 <?php
+namespace DTO;
 
+use Exception;
 use Http\IRequest;
 
-class AddLinkRequest
+final class AddLinkRequest
 {
     public function __construct(
         public readonly string $from,
@@ -10,13 +12,13 @@ class AddLinkRequest
     ) {
     }
 
-    public static function fromRequest(IRequest $request)
+    public static function fromRequest(IRequest $request): self
     {
         $from = $request->post("from");
         $to = $request->post("to");
         if (!$from || !$to) {
             throw new Exception();
         }
-        return new AddLinkRequest($from, $to);
+        return new self(trim($from), trim($to));
     }
 }

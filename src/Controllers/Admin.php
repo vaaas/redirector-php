@@ -1,9 +1,11 @@
 <?php
 namespace Controllers;
 
-use AddLinkRequest;
+use DTO\AddLinkRequest;
 use Views\AdminPanel;
 use BasicAuth;
+use DTO\DeleteLinkRequest;
+use Exception;
 use Http\IRequest;
 use Http\Response;
 use Links;
@@ -33,13 +35,31 @@ class Admin
     private function post(IRequest $request): Response
     {
         try {
-            $dto = AddLinkRequest::fromRequest($request);
-            $this->links->set($dto->from, $dto->to);
-            $this->links->save();
+            if ($request->query("add") === "") {
+                $this->add($request);
+            } elseif ($request->query("delete") === "") {
+                $this->delete($request);
+            } else {
+                throw new Exception();
+            }
         } catch (Throwable $error) {
             error_log($error->getMessage());
         }
-        return (new AdminPanel())->response();
+        return Response::redirect("/");
+    }
+
+    private function add(IRequest $request): void
+    {
+        $dto = AddLinkRequest::fromRequest($request);
+        $this->links->set($dto->from, $dto->to);
+        $this->links->save();
+    }
+
+    private function delete(IRequest $request): void
+    {
+        $dto = DeleteLinkRequest::fromRequest($request);
+        $this->links->delete($dto->entry);
+        $this->links->save();
     }
 
     private function get(): Response

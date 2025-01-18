@@ -1,80 +1,25 @@
+<?php
+use Components\AddEntry;
+use Components\Row;
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8" />
+        <title>redirector-php admin panel</title>
         <style>
-            html {
-                font-family: monospace;
-                font-size: 16px;
-            }
-
-            * { line-height: 1.5em; }
-
-            h1 {
-                margin: 0;
-                padding-bottom: 1em;
-                font-size: 1em;
-            }
-
-            body {
-                padding: 1em;
-                max-width: 50em;
-                margin: auto;
-            }
-
-            input {
-                border: none;
-                border-bottom: 1px solid #aaa;
-                font-size: 1em;
-                width: 100%;
-            }
-
-            input:focus {
-                outline: none;
-                background-color: #eef;
-                border-bottom-color: #88f;
-            }
-
-            button {
-                border: none;
-                background: none;
-                padding: 0;
-                font-weight: bold;
-                cursor: pointer;
-                font-size: 1em;
-            }
-
-            button.add {
-                color: #44f;
-            }
-
-            button.delete {
-                color: #f44;
-            }
-
-            table {
-                width: 100%;
-            }
-
-            a {
-                color: #44f;
-            }
-
-            th {
-                font-weight: normal;
-                color: #484;
-            }
-
-            td + td {
-                padding-left: 1em;
-            }
-
-            tr + tr td {
-                padding-top: 1em;
-            }
+            <?= file_get_contents(__DIR__ . "/style.css") ?>
         </style>
     </head>
     <body>
         <h1>Redirector-php admin panel</h1>
+
+        <form id="add" action="/?add" method="post"></form>
+
+        <?php foreach (array_keys($this->links) as $k): ?>
+            <form id="delete-<?= $k ?>" action="/?delete" method="post"></form>
+        <?php endforeach; ?>
 
         <table>
             <tr>
@@ -82,40 +27,10 @@
                 <th>Destination</th>
             </tr>
 
-            <tr>
-                <form action="/?add" method="post">
-                    <td>
-                        <input name="from" type="text" placeholder="From"/>
-                    </td>
-                    <td>
-                        <input name="to" type="text" placeholder="To (url)"/>
-                    </td>
-                    <td>
-                        <button class="add" type="submit" name="action" value="add">
-                            Add
-                        </button>
-                    </td>
-                </form>
-            </tr>
+            <?= new AddEntry() ?>
 
             <?php foreach ($this->links as $k => $v): ?>
-                <tr>
-                    <td>
-                        <?= htmlspecialchars($k) ?>
-                    </td>
-                    <td>
-                        <a href="<?= htmlspecialchars(
-                            $v
-                        ) ?>"><?= htmlspecialchars($v) ?></a>
-                    </td>
-                    <td>
-                        <form action="/?delete" method="post">
-                            <button class="delete" name="action" value="delete">
-                                Delete
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                <?= new Row($k, $v) ?>
             <?php endforeach; ?>
         </table>
     </body>
