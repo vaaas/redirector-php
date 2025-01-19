@@ -11,7 +11,7 @@ container() {
   tar -xf $build/alpine.tar.gz -C $build/container
   cp /etc/resolv.conf $build/container/etc/resolv.conf
   chroot $build/container apk add php83-fpm
-  mkdir -p $build/container/app
+  mkdir -p $build/container/app $build/container/app/storage
   cp -r ./src/* $build/container/app
   cp ./etc/php-fpm.conf $build/container/etc/php83/php-fpm.conf
   rm $build/container/etc/resolv.conf
