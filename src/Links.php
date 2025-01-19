@@ -35,7 +35,7 @@ class Links
     public static function provider(): self
     {
         /** @var array<string, string> $entries */
-        $entries = unserialize(file_get_contents(self::$path)) ?: [];
+        $entries = unserialize(file_get_contents(self::$path) ?: "") ?: [];
         return new self($entries);
     }
 }

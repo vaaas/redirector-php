@@ -18,6 +18,7 @@ class ServiceLocator
         if (!array_key_exists($request, self::$instances)) {
             self::instantiate($request);
         }
+        /** @var T */
         return self::$instances[$request];
     }
 
