@@ -1,2 +1,6 @@
 #!/bin/sh
-exec systemd-nspawn -i /srv/redirector/container.squashfs --chdir / /usr/sbin/php-fpm83 -F
+exec systemd-nspawn                             \
+    -i /srv/redirector/container.squashfs       \
+    --bind /srv/redirector/storage:/app/storage \
+    --chdir /                                   \
+    /usr/sbin/php-fpm83 -F
