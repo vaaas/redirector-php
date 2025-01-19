@@ -14,7 +14,7 @@ class BasicAuth
         );
     }
 
-    public function authorise(IRequest $request)
+    public function authorise(IRequest $request): void
     {
         $authorization = $request->header("Authorization");
         if (!$authorization) {

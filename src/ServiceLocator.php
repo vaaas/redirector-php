@@ -5,7 +5,7 @@ class ServiceLocator
     /** @var array<class-string, object> $instances */
     private static array $instances = [];
 
-    /** @var array<class-string, callable(): object> $provider */
+    /** @var array<class-string, callable(): object> $providers */
     private static array $providers = [];
 
     /**

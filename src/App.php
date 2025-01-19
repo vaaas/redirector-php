@@ -4,7 +4,7 @@ use Http\Response;
 
 class App
 {
-    public static function start()
+    public static function start(): void
     {
         $request = new Request();
         $response = Router::route($request);
