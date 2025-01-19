@@ -3,7 +3,9 @@ namespace Http;
 
 class Response
 {
-    /** @param array(string, string) $headers */
+    /**
+     * @param array<string, string> $headers
+     */
     public function __construct(
         public readonly int $status,
         public readonly array $headers,

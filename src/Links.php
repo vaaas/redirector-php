@@ -3,7 +3,7 @@ class Links
 {
     private static string $path = "storage/links";
 
-    /** @param array(string, string) $links */
+    /** @param array<string, string> $entries */
     public function __construct(public array $entries)
     {
     }
@@ -34,7 +34,7 @@ class Links
 
     public static function provider(): self
     {
-        /** @var array(string, string) $links */
+        /** @var array<string, string> $entries */
         $entries = unserialize(file_get_contents(self::$path)) ?: [];
         return new self($entries);
     }

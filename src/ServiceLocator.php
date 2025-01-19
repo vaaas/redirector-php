@@ -2,14 +2,14 @@
 
 class ServiceLocator
 {
-    /** @var array(class-string, object) $instances */
+    /** @var array<class-string, object> $instances */
     private static array $instances = [];
 
-    /** @var array(class-string, callable(): object) $provider */
+    /** @var array<class-string, callable(): object> $provider */
     private static array $providers = [];
 
     /**
-     * @template T
+     * @template T of object
      * @param class-string<T> $request
      * @return T
      */
@@ -24,7 +24,7 @@ class ServiceLocator
     /**
      * @template T of stdClass
      * @param class-string<T> $request
-     * @param callable(): T $callable
+     * @param callable(): T $provider
      * @return class-string<self>
      */
     public static function provide(string $request, callable $provider): string
