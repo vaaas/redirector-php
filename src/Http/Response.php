@@ -1,7 +1,8 @@
 <?php
 namespace Http;
 
-class Response
+/** @immutable */
+final class Response
 {
     /**
      * @param array<string, string> $headers

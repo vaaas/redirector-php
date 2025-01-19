@@ -4,6 +4,7 @@ namespace DTO;
 use Exception;
 use Http\IRequest;
 
+/** @immutable */
 final class AddLinkRequest
 {
     public function __construct(

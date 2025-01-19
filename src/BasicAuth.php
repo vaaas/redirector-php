@@ -2,7 +2,8 @@
 use Errors\Unauthorized;
 use Http\IRequest;
 
-class BasicAuth
+/** @immutable */
+final class BasicAuth
 {
     private readonly string $expected;
 

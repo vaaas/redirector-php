@@ -12,10 +12,11 @@ use ServiceLocator;
 use Throwable;
 use Views\AdminPanel;
 
-class Admin
+/** @immutable */
+final class Admin
 {
-    private BasicAuth $auth;
-    private Links $links;
+    private readonly BasicAuth $auth;
+    private readonly Links $links;
 
     public function __construct()
     {

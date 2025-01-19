@@ -3,10 +3,13 @@ namespace Components;
 
 use Stringable;
 
-class Row implements Stringable
+/** @immutable */
+final class Row implements Stringable
 {
-    public function __construct(private string $from, private string $to)
-    {
+    public function __construct(
+        private readonly string $from,
+        private readonly string $to
+    ) {
     }
 
     public function __toString(): string

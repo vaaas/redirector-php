@@ -3,7 +3,8 @@ namespace Components;
 
 use Stringable;
 
-class AddEntry implements Stringable
+/** @immutable */
+final class AddEntry implements Stringable
 {
     public function __toString(): string
     {

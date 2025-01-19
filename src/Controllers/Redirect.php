@@ -7,9 +7,11 @@ use Http\Response;
 use Links;
 use ServiceLocator;
 
-class Redirect
+/** @immutable */
+final class Redirect
 {
     private readonly Links $links;
+
     public function __construct()
     {
         $this->links = ServiceLocator::get(Links::class);

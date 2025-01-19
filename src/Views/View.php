@@ -7,7 +7,7 @@ use Http\Response;
 
 abstract class View implements Respondable
 {
-    public string $view;
+    protected string $view;
 
     private function contents(): string
     {

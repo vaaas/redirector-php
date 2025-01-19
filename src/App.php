@@ -2,7 +2,7 @@
 use Http\Request;
 use Http\Response;
 
-class App
+final class App
 {
     public static function start(): void
     {

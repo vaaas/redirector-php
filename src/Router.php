@@ -4,7 +4,7 @@ use Http\IRequest;
 use Http\Respondable;
 use Http\Response;
 
-class Router
+final class Router
 {
     public static function route(IRequest $request): Response
     {

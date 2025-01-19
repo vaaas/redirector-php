@@ -1,11 +1,12 @@
 <?php
 namespace Http;
 
-class Request implements IRequest
+final class Request implements IRequest
 {
     public function header(string $k): ?string
     {
         $headers = getallheaders() ?: [];
+        /** @var ?string */
         return array_key_exists($k, $headers) ? $headers[$k] : null;
     }
 

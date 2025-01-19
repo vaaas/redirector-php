@@ -4,6 +4,6 @@
   },
   "scripts": {
     "dev": "php -S 0.0.0.0:8000 src/index.php",
-    "check": "vendor/bin/phpstan analyse -l 9 src"
+    "check": "vendor/bin/phpstan analyse -l 10 src"
   }
 }

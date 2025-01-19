@@ -5,7 +5,7 @@ use Exception;
 use Http\Respondable;
 use Http\Response;
 
-class Unauthorized extends Exception implements Respondable
+final class Unauthorized extends Exception implements Respondable
 {
     public function response(): Response
     {

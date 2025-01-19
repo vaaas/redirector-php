@@ -4,7 +4,7 @@ namespace Views;
 use Links;
 use ServiceLocator;
 
-class AdminPanel extends View
+final class AdminPanel extends View
 {
     /** @var array<string, string> $links */
     public readonly array $links;

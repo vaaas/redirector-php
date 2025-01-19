@@ -1,6 +1,6 @@
 <?php
 
-class ServiceLocator
+final class ServiceLocator
 {
     /** @var array<class-string, object> $instances */
     private static array $instances = [];

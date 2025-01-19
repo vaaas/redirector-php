@@ -4,6 +4,7 @@ namespace DTO;
 use Exception;
 use Http\IRequest;
 
+/** @immutable */
 final class DeleteLinkRequest
 {
     public function __construct(public readonly string $entry)

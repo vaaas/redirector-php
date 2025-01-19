@@ -1,8 +1,9 @@
 <?php
 
-class Configuration
+/** @immutable */
+final class Configuration
 {
-    private static string $location = "storage/configuration.php";
+    private const LOCATION = "storage/configuration.php";
 
     public function __construct(
         public readonly string $authUsername,
@@ -12,7 +13,11 @@ class Configuration
 
     public static function provider(): self
     {
-        $config = require self::$location;
-        return new self($config["authUsername"], $config["authPassword"]);
+        /** @var array<string, string> $config */
+        $config = require self::LOCATION;
+        return new self(
+            $config["authUsername"] ?: "",
+            $config["authPassword"] ?: ""
+        );
     }
 }

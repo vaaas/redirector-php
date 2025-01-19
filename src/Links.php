@@ -1,7 +1,7 @@
 <?php
-class Links
+final class Links
 {
-    private static string $path = "storage/links";
+    private const LOCATION = "storage/links";
 
     /** @param array<string, string> $entries */
     public function __construct(public array $entries)
@@ -29,13 +29,13 @@ class Links
 
     public function save(): void
     {
-        file_put_contents(self::$path, serialize($this->entries));
+        file_put_contents(self::LOCATION, serialize($this->entries));
     }
 
     public static function provider(): self
     {
         /** @var array<string, string> $entries */
-        $entries = unserialize(file_get_contents(self::$path) ?: "") ?: [];
+        $entries = unserialize(file_get_contents(self::LOCATION) ?: "") ?: [];
         return new self($entries);
     }
 }
