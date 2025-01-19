@@ -3,21 +3,6 @@ namespace Http;
 
 class Request implements IRequest
 {
-    public function uri(): string
-    {
-        return $_SERVER["REQUEST_URI"];
-    }
-
-    public function resource(): string
-    {
-        $uri = $this->uri();
-        $end = strpos($uri, "?");
-        if ($end === false) {
-            $end = strlen($uri);
-        }
-        return substr($uri, 1, $end - 1);
-    }
-
     public function header(string $k): ?string
     {
         $headers = getallheaders() ?: [];
@@ -37,5 +22,20 @@ class Request implements IRequest
     public function query(string $k): ?string
     {
         return array_key_exists($k, $_GET) ? $_GET[$k] : null;
+    }
+
+    public function resource(): string
+    {
+        $uri = $this->uri();
+        $end = strpos($uri, "?");
+        if ($end === false) {
+            $end = strlen($uri);
+        }
+        return substr($uri, 1, $end - 1);
+    }
+
+    public function uri(): string
+    {
+        return $_SERVER["REQUEST_URI"];
     }
 }

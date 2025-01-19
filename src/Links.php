@@ -18,11 +18,13 @@ class Links
     public function set(string $from, string $to): void
     {
         $this->entries[$from] = $to;
+        $this->save();
     }
 
     public function delete(string $from): void
     {
         unset($this->entries[$from]);
+        $this->save();
     }
 
     public function save(): void

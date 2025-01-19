@@ -1,5 +1,4 @@
 <?php
-
 use Http\Request;
 use Http\Response;
 

@@ -1,9 +1,8 @@
 <?php
 namespace Controllers;
 
-use DTO\AddLinkRequest;
-use Views\AdminPanel;
 use BasicAuth;
+use DTO\AddLinkRequest;
 use DTO\DeleteLinkRequest;
 use Exception;
 use Http\IRequest;
@@ -11,6 +10,7 @@ use Http\Response;
 use Links;
 use ServiceLocator;
 use Throwable;
+use Views\AdminPanel;
 
 class Admin
 {
@@ -52,14 +52,12 @@ class Admin
     {
         $dto = AddLinkRequest::fromRequest($request);
         $this->links->set($dto->from, $dto->to);
-        $this->links->save();
     }
 
     private function delete(IRequest $request): void
     {
         $dto = DeleteLinkRequest::fromRequest($request);
         $this->links->delete($dto->entry);
-        $this->links->save();
     }
 
     private function get(): Response

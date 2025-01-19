@@ -1,5 +1,4 @@
 <?php
-
 use Errors\Unauthorized;
 use Http\IRequest;
 
