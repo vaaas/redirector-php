@@ -11,16 +11,19 @@ class Request implements IRequest
 
     public function method(): string
     {
+        /** @var string */
         return $_SERVER["REQUEST_METHOD"];
     }
 
     public function post(string $k): ?string
     {
+        /** @var ?string */
         return array_key_exists($k, $_POST) ? $_POST[$k] : null;
     }
 
     public function query(string $k): ?string
     {
+        /** @var ?string */
         return array_key_exists($k, $_GET) ? $_GET[$k] : null;
     }
 
@@ -36,6 +39,7 @@ class Request implements IRequest
 
     public function uri(): string
     {
+        /** @var string */
         return $_SERVER["REQUEST_URI"];
     }
 }

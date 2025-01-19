@@ -35,7 +35,7 @@ class ServiceLocator
     }
 
     /**
-     * @template T
+     * @template T of object
      * @param class-string<T> $request
      */
     private static function instantiate(string $request): void
