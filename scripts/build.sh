@@ -43,6 +43,17 @@ EOF
   cat << EOF > $dirname/DEBIAN/postinst
 systemctl start container@redirector
 systemctl start caddy
+if ! test -f /srv/$name/storage/configuration.php
+then
+    echo 'No configuration file found. Generating one for you.'
+    cat << INNER > $/srv/$name/storage/configuration.php
+<?php
+return [
+    "authUsername" => "admin",
+    "authPassword" => $(tr -dc A-Za-z0-9 </dev/urandom | head -c 20),
+];
+INNER
+fi
 EOF
   chmod +x $dirname/DEBIAN/postinst
 
