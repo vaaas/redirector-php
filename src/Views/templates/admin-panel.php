@@ -1,6 +1,8 @@
 <?php
 use Components\AddEntry;
 use Components\Row;
+
+/** @var Views\AdminPanel $this */
 ?>
 
 <!DOCTYPE html>

@@ -7,7 +7,7 @@ use ServiceLocator;
 class AdminPanel extends View
 {
     /** @var array(string, string) $links */
-    protected readonly array $links;
+    public readonly array $links;
 
     public function __construct()
     {

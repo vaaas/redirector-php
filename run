@@ -3,15 +3,20 @@
 tag=redirector-php
 
 case $1 in
-  container:build)
+  build)
     podman build -t $tag -f Containerfile.dev .
     ;;
 
-  container:dev)
-    podman run --volume ./:/opt/app -p 8000:8000 -i -t $tag /opt/app/run dev
+  dev)
+    podman run --volume ./:/opt/app -p 8000:8000 -i -t $tag /usr/bin/composer run-script dev
     ;;
 
-  dev)
-    php84 -S 0.0.0.0:8000 src/index.php
+  shell)
+    podman run --volume ./:/opt/app -i -t $tag /bin/sh
+    ;;
+
+  composer)
+    shift 1
+    podman run --volume ./:/opt/app --env COMPOSER_ALLOW_SUPERUSER=1 -i -t $tag /usr/bin/composer "$@"
     ;;
 esac

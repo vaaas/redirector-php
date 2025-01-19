@@ -22,9 +22,9 @@ class ServiceLocator
     }
 
     /**
-     * @template T
+     * @template T of stdClass
      * @param class-string<T> $request
-     * @param callable(): T $request
+     * @param callable(): T $callable
      * @return class-string<self>
      */
     public static function provide(string $request, callable $provider): string

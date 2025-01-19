@@ -1,0 +1,9 @@
+{
+  "require-dev": {
+    "phpstan/phpstan": "^2.1"
+  },
+  "scripts": {
+    "dev": "php -S 0.0.0.0:8000 src/index.php",
+    "check": "vendor/bin/phpstan analyse -l 1 src"
+  }
+}
