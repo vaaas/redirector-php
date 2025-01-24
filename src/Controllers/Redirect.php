@@ -1,10 +1,10 @@
 <?php
 namespace Controllers;
 
+use DataAccess\Links;
 use Errors\NotFound;
 use Http\IRequest;
 use Http\Response;
-use Links;
 use ServiceLocator;
 
 /** @immutable */

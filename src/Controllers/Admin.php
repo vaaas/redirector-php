@@ -2,12 +2,12 @@
 namespace Controllers;
 
 use BasicAuth;
+use DataAccess\Links;
 use DTO\AddLinkRequest;
 use DTO\DeleteLinkRequest;
 use Exception;
 use Http\IRequest;
 use Http\Response;
-use Links;
 use ServiceLocator;
 use Throwable;
 use Presentation\Views\AdminPanel;

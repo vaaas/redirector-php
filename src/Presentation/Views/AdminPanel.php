@@ -1,7 +1,7 @@
 <?php
 namespace Presentation\Views;
 
-use Links;
+use DataAccess\Links;
 use ServiceLocator;
 
 final class AdminPanel extends View
@@ -13,6 +13,6 @@ final class AdminPanel extends View
 
     public function __construct()
     {
-        $this->links = ServiceLocator::get(Links::class)->entries;
+        $this->links = ServiceLocator::get(Links::class)->all();
     }
 }
