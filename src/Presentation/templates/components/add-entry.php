@@ -1,14 +1,3 @@
-<?php
-namespace Components;
-
-use Stringable;
-
-/** @immutable */
-final class AddEntry implements Stringable
-{
-    public function __toString(): string
-    {
-        return <<<EOF
 <tr>
     <td>
         <input form="add" name="from" type="text" placeholder="From" />
@@ -22,6 +11,3 @@ final class AddEntry implements Stringable
         </button>
     </td>
 </tr>
-EOF;
-    }
-}

@@ -10,7 +10,7 @@ use Http\Response;
 use Links;
 use ServiceLocator;
 use Throwable;
-use Views\AdminPanel;
+use Presentation\Views\AdminPanel;
 
 /** @immutable */
 final class Admin

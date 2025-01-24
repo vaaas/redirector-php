@@ -1,17 +1,18 @@
 <?php
-namespace Views;
+namespace Presentation\Views;
 
 use Links;
 use ServiceLocator;
 
 final class AdminPanel extends View
 {
+    public const template = "views/admin-panel";
+
     /** @var array<string, string> $links */
     public readonly array $links;
 
     public function __construct()
     {
         $this->links = ServiceLocator::get(Links::class)->entries;
-        $this->view = "admin-panel";
     }
 }
