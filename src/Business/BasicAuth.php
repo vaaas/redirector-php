@@ -1,6 +1,10 @@
 <?php
+namespace Business;
+
+use Configuration;
 use Errors\Unauthorized;
 use Http\IRequest;
+use ServiceLocator;
 
 /** @immutable */
 final class BasicAuth

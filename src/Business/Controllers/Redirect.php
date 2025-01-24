@@ -1,5 +1,5 @@
 <?php
-namespace Controllers;
+namespace Business\Controllers;
 
 use DataAccess\Links;
 use Errors\NotFound;

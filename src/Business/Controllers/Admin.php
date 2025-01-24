@@ -1,7 +1,7 @@
 <?php
-namespace Controllers;
+namespace Business\Controllers;
 
-use BasicAuth;
+use Business\BasicAuth;
 use DataAccess\Links;
 use DTO\AddLinkRequest;
 use DTO\DeleteLinkRequest;

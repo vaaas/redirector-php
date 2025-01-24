@@ -1,4 +1,7 @@
 <?php
+namespace Business;
+
+use Business\Router;
 use Http\Request;
 use Http\Response;
 

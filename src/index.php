@@ -9,4 +9,4 @@ spl_autoload_register(function (string $class) {
 ServiceLocator::provide(Links::class, Links::provider(...));
 ServiceLocator::provide(Configuration::class, Configuration::provider(...));
 
-App::start();
+Business\App::start();
