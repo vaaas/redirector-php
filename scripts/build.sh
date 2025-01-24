@@ -12,7 +12,7 @@ container() {
   cp /etc/resolv.conf $build/container/etc/resolv.conf
   chroot $build/container apk add php83-fpm
   mkdir -p $build/container/app $build/container/app/storage
-  cp -r ./src/* $build/container/app
+  cp -r ./src/* ./assets $build/container/app
   cp ./etc/php-fpm.conf $build/container/etc/php83/php-fpm.conf
   rm $build/container/etc/resolv.conf
   mksquashfs $build/container/ $build/container.squashfs
