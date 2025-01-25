@@ -4,9 +4,10 @@ use Presentation\Components\AddEntry;
 use Presentation\Components\Row;
 use Presentation\Layouts\DefaultLayout;
 
-$this->setLayout(new DefaultLayout("redirector-php admin panel"));
+$title = "redirector-php admin panel";
+$this->setLayout(new DefaultLayout($title));
 ?>
-<h1>Redirector-php admin panel</h1>
+<h1><?= $title ?></h1>
 
 <form id="add" action="/?add" method="post"></form>
 

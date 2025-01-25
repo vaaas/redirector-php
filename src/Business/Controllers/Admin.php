@@ -24,17 +24,15 @@ final class Admin
         $this->links = ServiceLocator::get(Links::class);
     }
 
-    public function handle(IRequest $request): Response
+    public function get(): Response
     {
-        $this->auth->authorise($request);
-        return match ($request->method()) {
-            "POST" => self::post($request),
-            default => self::get(),
-        };
+        return (new AdminPanel())->response();
     }
 
-    private function post(IRequest $request): Response
+    public function post(IRequest $request): Response
     {
+        $this->auth->authorise($request);
+
         try {
             if ($request->query("add") === "") {
                 $this->add($request);
@@ -59,10 +57,5 @@ final class Admin
     {
         $dto = DeleteLinkRequest::fromRequest($request);
         $this->links->delete($dto->entry);
-    }
-
-    private function get(): Response
-    {
-        return (new AdminPanel())->response();
     }
 }

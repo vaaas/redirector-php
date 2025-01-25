@@ -17,7 +17,7 @@ final class Redirect
         $this->links = ServiceLocator::get(Links::class);
     }
 
-    public function handle(IRequest $request): Response
+    public function get(IRequest $request): Response
     {
         $target = $this->links->get($request->resource());
         if (!$target) {
