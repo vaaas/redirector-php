@@ -13,11 +13,6 @@ jobs:
     steps:
       - name: check out
         uses: actions/checkout@v4
-      - name: install dependencies
-        shell: bash
-        run: |
-          sudo apt update
-          sudo apt install --yes curl openssh-client squashfs-tools
       - name: build
         shell: bash
         run: sudo ./scripts/build.sh
@@ -37,4 +32,5 @@ jobs:
         env:
           DOMAIN: ${{vars.DOMAIN}}
           USER: ${{vars.USER}}
+          PORT: ${{vars.PORT}}
         run: ./scripts/deploy.sh

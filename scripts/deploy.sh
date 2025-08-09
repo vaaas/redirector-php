@@ -7,16 +7,20 @@ if test -z "$DOMAIN"
 then DOMAIN=sexualise.it
 fi
 
+if test -z "$PORT"
+then PORT=22
+fi
+
 auth=$USER@$DOMAIN
 pkg=`basename *.deb`
 
 echo 'uploading package'
-scp $pkg $auth:/root/$pkg
+scp -P $PORT $pkg $auth:/root/$pkg
 
 echo 'installing'
-ssh $auth apt install /root/$pkg
+ssh -p $PORT $auth dpkg -i /root/$pkg
 
-echo 'cleanup'
-ssh $auth rm -v /root/$pkg
+# echo 'cleanup'
+# ssh -p $PORT $auth rm -v /root/$pkg
 
 echo 'done!'
