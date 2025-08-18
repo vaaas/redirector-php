@@ -13,3 +13,9 @@ $to = htmlspecialchars($this->to);
         </button>
     </td>
 </tr>
+<style>
+button.delete {
+    font-weight: bold;
+    color: var(--red);
+}
+</style>

@@ -29,3 +29,33 @@ $this->setLayout(new DefaultLayout($title));
         <?= new Row($k, $v) ?>
     <?php endforeach; ?>
 </table>
+
+<style>
+h1 {
+    display: block;
+    padding-bottom: 1rem;
+    font-weight: bold;
+}
+
+table {
+    display: table;
+}
+
+tr {
+    display: table-row;
+}
+
+td,
+th {
+    display: table-cell;
+}
+
+td + td,
+th + th {
+    padding-left: 1rem;
+}
+
+th {
+    color: var(--s00);
+}
+</style>
