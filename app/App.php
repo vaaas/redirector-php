@@ -1,10 +1,7 @@
 <?php
-namespace Business;
-
-use Business\Router;
+use Http\Router;
 use Http\Request;
 use Http\Response;
-use ServiceLocator;
 
 final class App
 {

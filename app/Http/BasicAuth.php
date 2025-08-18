@@ -1,8 +1,8 @@
 <?php
-namespace Business;
+namespace Http;
 
 use Configuration;
-use Errors\Unauthorized;
+use Http\Errors\Unauthorized;
 use Http\IRequest;
 use ServiceLocator;
 

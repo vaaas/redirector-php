@@ -1,5 +1,5 @@
 <?php
-namespace DTO;
+namespace Features\Admin;
 
 use Exception;
 use Http\IRequest;
@@ -7,9 +7,7 @@ use Http\IRequest;
 /** @immutable */
 final class DeleteLinkRequest
 {
-    public function __construct(public readonly string $entry)
-    {
-    }
+    public function __construct(public readonly string $entry) { }
 
     public static function fromRequest(IRequest $request): self
     {

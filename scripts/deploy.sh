@@ -20,7 +20,7 @@ scp -P $PORT $pkg $auth:/root/$pkg
 echo 'installing'
 ssh -p $PORT $auth dpkg -i /root/$pkg
 
-# echo 'cleanup'
-# ssh -p $PORT $auth rm -v /root/$pkg
+echo 'cleanup'
+ssh -p $PORT $auth rm -v /root/$pkg
 
 echo 'done!'

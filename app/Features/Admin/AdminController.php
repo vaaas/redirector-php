@@ -1,28 +1,21 @@
 <?php
-namespace Business\Controllers;
+namespace Features\Admin;
 
-use Business\BasicAuth;
 use DataAccess\Links;
-use DTO\AddLinkRequest;
-use DTO\DeleteLinkRequest;
 use Exception;
+use Http\BasicAuth;
 use Http\IRequest;
 use Http\Response;
-use ServiceLocator;
 use Throwable;
 use Presentation\Views\AdminPanel;
 
 /** @immutable */
-final class Admin
+final class AdminController
 {
-    private readonly BasicAuth $auth;
-    private readonly Links $links;
-
-    public function __construct()
-    {
-        $this->auth = ServiceLocator::get(BasicAuth::class);
-        $this->links = ServiceLocator::get(Links::class);
-    }
+    public function __construct(
+        private readonly BasicAuth $auth,
+        private readonly Links $links,
+    ) { }
 
     public function get(IRequest $request): Response
     {

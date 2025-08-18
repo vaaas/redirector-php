@@ -1,21 +1,17 @@
 <?php
-namespace Business\Controllers;
+namespace Features\Redirect;
 
 use DataAccess\Links;
-use Errors\NotFound;
+use Http\Errors\NotFound;
 use Http\IRequest;
 use Http\Response;
-use ServiceLocator;
 
 /** @immutable */
-final class Redirect
+final class RedirectController
 {
-    private readonly Links $links;
-
-    public function __construct()
-    {
-        $this->links = ServiceLocator::get(Links::class);
-    }
+    public function __construct(
+        private readonly Links $links,
+    ) { }
 
     public function get(IRequest $request): Response
     {

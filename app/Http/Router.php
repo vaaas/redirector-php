@@ -1,8 +1,8 @@
 <?php
-namespace Business;
+namespace Http;
 
-use Errors\MethodNotAllowed;
-use Errors\NotFound;
+use Http\Errors\MethodNotAllowed;
+use Http\Errors\NotFound;
 use Http\IRequest;
 use Http\Respondable;
 use Http\Response;
@@ -13,7 +13,13 @@ use TypeError;
 final class Router
 {
     /** @param array<string, class-string> $routes */
-    public function __construct(private readonly array $routes) {}
+    public function __construct(private array $routes = []) {}
+
+    /** @param class-string $value */
+    public function add(string $key, string $value): self {
+        $this->routes[$key] = $value;
+        return $this;
+    }
 
     public function route(IRequest $request): Response
     {

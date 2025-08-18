@@ -1,5 +1,5 @@
 <?php
-namespace Errors;
+namespace Http\Errors;
 
 use Exception;
 use Http\Respondable;

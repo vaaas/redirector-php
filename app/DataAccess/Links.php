@@ -3,10 +3,11 @@ namespace DataAccess;
 
 final class Links
 {
-    private const LOCATION = "storage/links";
-
     /** @param array<string, string> $entries */
-    public function __construct(private array $entries) {}
+    public function __construct(
+        private array $entries,
+        private readonly string $location,
+    ) {}
 
     public function get(string $link): ?string
     {
@@ -29,19 +30,12 @@ final class Links
 
     public function save(): void
     {
-        file_put_contents(self::LOCATION, serialize($this->entries));
+        file_put_contents($this->location, serialize($this->entries));
     }
 
     /** @return array<string, string> $entries */
     public function all(): array
     {
         return $this->entries;
-    }
-
-    public static function provider(): self
-    {
-        /** @var array<string, string> $entries */
-        $entries = unserialize(file_get_contents(self::LOCATION) ?: "") ?: [];
-        return new self($entries);
     }
 }
