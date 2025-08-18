@@ -1,4 +1,6 @@
 #!/bin/sh
+set -e
+
 if test -z "$USER"
 then USER=root
 fi
