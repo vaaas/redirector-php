@@ -3,11 +3,48 @@
 }
 
 :root {
-    --bg: #050607;
-    --fg: #d6dae0;
-    --green: #7ba671;
-    --blue: #799fc5;
-    --yellow: #e8c26e;
+    --b03: #002d38;
+    --b02: #093946;
+    --b01: #5b7279;
+    --b00: #657377;
+    --b0: #98a8a8;
+    --b1: #9faaab;
+    --b2: #f1e9d2;
+    --b3: #fbf7ef;
+    --yellow: #ac8300;
+    --orange: #d56500;
+    --red: #f23749;
+    --magenta: #dd459d;
+    --violet: #7d80d1;
+    --blue: #2b90d8;
+    --cyan: #259d94;
+    --green: #819500;
+}
+
+@media screen and (prefers-color-scheme: light) {
+    :root {
+        --s03: var(--b03);
+        --s02: var(--b02);
+        --s01: var(--b01);
+        --s00: var(--b00);
+        --s0: var(--b0);
+        --s1: var(--b1);
+        --s2: var(--b2);
+        --s3: var(--b3);
+    }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --s03: var(--b3);
+        --s02: var(--b2);
+        --s01: var(--b1);
+        --s00: var(--b0);
+        --s0: var(--b00);
+        --s1: var(--b01);
+        --s2: var(--b02);
+        --s3: var(--b03);
+    }
 }
 
 head {
@@ -32,8 +69,8 @@ html {
     font-size: 16px;
     display: block;
     line-height: 1.5rem;
-    color: var(--fg);
-    background-color: var(--bg);
+    color: var(--s00);
+    background-color: var(--s2);
 }
 
 body {
@@ -67,7 +104,7 @@ th + th {
 }
 
 th {
-    color: var(--green);
+    color: var(--s00);
 }
 
 button.add {
@@ -77,7 +114,7 @@ button.add {
 
 button.delete {
     font-weight: bold;
-    color: var(--yellow);
+    color: var(--red);
 }
 
 button:focus,
@@ -86,10 +123,10 @@ button:hover {
 }
 
 input[type="text"] {
-    background-color: #15171a;
-    border-bottom: 1px solid #7c8693;
+    background-color: var(--s2);
+    border-bottom: 1px solid var(--s1);
 }
 
 input[type="text"]:focus {
-    background-color: #25292d;
+    background-color: var(--s3);
 }
