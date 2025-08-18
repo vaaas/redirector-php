@@ -26,7 +26,10 @@ final class Router
 
     private function tryToRoute(IRequest $request): Response
     {
-        $class = $this->routes[$request->resource()] ?: $this->routes["*"];
+        $resource = $request->resource();
+        $class = array_key_exists($resource, $this->routes)
+            ? $this->routes[$resource]
+            : $this->routes['*'];
         if (!$class) {
             throw new NotFound();
         }

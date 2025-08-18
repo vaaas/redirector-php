@@ -24,8 +24,9 @@ final class Admin
         $this->links = ServiceLocator::get(Links::class);
     }
 
-    public function get(): Response
+    public function get(IRequest $request): Response
     {
+        $this->auth->authorise($request);
         return (new AdminPanel())->response();
     }
 

@@ -8,7 +8,7 @@ timestamp=$(date '+%s')
 package() {
   dirname=$build/"$name"_"$timestamp"_amd64
   mkdir -p $dirname/DEBIAN $dirname/srv/$name/storage
-  cp -r etc/Caddyfile src/* assets $dirname/srv/$name
+  cp -r etc/Caddyfile index.php app assets $dirname/srv/$name
   chmod 755 $dirname/DEBIAN
 
   cat << EOF > $dirname/DEBIAN/control
