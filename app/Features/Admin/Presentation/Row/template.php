@@ -1,5 +1,6 @@
 <?php
-/** @var Presentation\Components\Row $this */
+use Features\Admin\Presentation\Row\Row;
+/** @var Row $this */
 $from = htmlspecialchars($this->from);
 $to = htmlspecialchars($this->to);
 ?>

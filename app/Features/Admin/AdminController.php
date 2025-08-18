@@ -3,11 +3,11 @@ namespace Features\Admin;
 
 use DataAccess\Links;
 use Exception;
+use Features\Admin\Presentation\AdminPanel\AdminPanel;
 use Http\BasicAuth;
 use Http\IRequest;
 use Http\Response;
 use Throwable;
-use Presentation\Views\AdminPanel;
 
 /** @immutable */
 final class AdminController

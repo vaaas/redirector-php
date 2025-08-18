@@ -1,8 +1,10 @@
 <?php
-/** @var Presentation\Views\AdminPanel $this */
-use Presentation\Components\AddEntry;
-use Presentation\Components\Row;
-use Presentation\Layouts\DefaultLayout;
+use Features\Admin\Presentation\AddEntry\AddEntry;
+use Features\Admin\Presentation\AdminPanel\AdminPanel;
+use Features\Admin\Presentation\DefaultLayout\DefaultLayout;
+use Features\Admin\Presentation\Row\Row;
+
+/** @var AdminPanel $this */
 
 $title = "redirector-php admin panel";
 $this->setLayout(new DefaultLayout($title));

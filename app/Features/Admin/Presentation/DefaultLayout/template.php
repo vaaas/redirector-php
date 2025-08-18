@@ -1,5 +1,5 @@
 <?php
-/** @var \Presentation\Layouts\DefaultLayout $this */
+/** @var Features\Admin\Presentation\DefaultLayout\DefaultLayout $this */
 ?>
 <!DOCTYPE html>
 <html>

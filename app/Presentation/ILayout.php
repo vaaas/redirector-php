@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Layouts;
+namespace Presentation;
 
 use Stringable;
 
