@@ -1,5 +1,5 @@
 FROM debian:13.0
-RUN apt update && apt install --no-install-recommends --no-install-suggests --yes php-cli composer
+RUN apt update && apt install --no-install-recommends --no-install-suggests --yes php php-cli composer php-xml unzip
 RUN mkdir /opt/app
 EXPOSE 8000
 WORKDIR /opt/app
