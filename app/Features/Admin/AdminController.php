@@ -20,7 +20,7 @@ final class AdminController
     public function get(IRequest $request): Response
     {
         $this->auth->authorise($request);
-        return (new AdminPanel())->response();
+        return (new AdminPanel($this->links))->response();
     }
 
     public function post(IRequest $request): Response

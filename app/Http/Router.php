@@ -1,19 +1,24 @@
 <?php
 namespace Http;
 
+use DependencyInjection\Container;
 use Http\Errors\MethodNotAllowed;
 use Http\Errors\NotFound;
 use Http\IRequest;
 use Http\Respondable;
 use Http\Response;
-use ServiceLocator;
 use Throwable;
 use TypeError;
 
 final class Router
 {
-    /** @param array<string, class-string> $routes */
-    public function __construct(private array $routes = []) {}
+    /** @var array<string, class-string> $routes */
+    private array $routes;
+
+    public function __construct(private Container $container)
+    {
+        $this->routes = [];
+    }
 
     /** @param class-string $value */
     public function add(string $key, string $value): self {
@@ -39,7 +44,7 @@ final class Router
         if (!$class) {
             throw new NotFound();
         }
-        $instance = ServiceLocator::get($class);
+        $instance = $this->container->get($class);
         $method = strtolower($request->method());
         if (!method_exists($instance, $method)) {
             throw new MethodNotAllowed();

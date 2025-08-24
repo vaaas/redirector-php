@@ -4,16 +4,14 @@ namespace Http;
 use Configuration;
 use Http\Errors\Unauthorized;
 use Http\IRequest;
-use ServiceLocator;
 
 /** @immutable */
 final class BasicAuth
 {
     private readonly string $expected;
 
-    public function __construct()
+    public function __construct(Configuration $config)
     {
-        $config = ServiceLocator::get(Configuration::class);
         $this->expected = base64_encode(
             "{$config->authUsername}:{$config->authPassword}"
         );
