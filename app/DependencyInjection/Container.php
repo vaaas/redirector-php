@@ -52,6 +52,11 @@ final class Container
         return $this;
     }
 
+    public function register(IProvider $provider): self
+    {
+        return $provider->register($this);
+    }
+
     public function call(Closure $f): mixed
     {
         $reflection = new ReflectionFunction($f);

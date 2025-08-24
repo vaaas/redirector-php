@@ -9,12 +9,12 @@ use Features\Redirect\RedirectRoute;
 
 class RouterProvider implements IProvider
 {
-    public static function register(Container $container): Container
+    public function register(Container $container): Container
     {
-        return $container->provide(Router::class, fn() => self::get($container));
+        return $container->provide(Router::class, fn() => $this->get($container));
     }
 
-    private static function get(Container $container): Router
+    private function get(Container $container): Router
     {
         $router = new Router($container);
         RedirectRoute::install($router);

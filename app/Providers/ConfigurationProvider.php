@@ -2,21 +2,23 @@
 namespace Providers;
 
 use Configuration;
+use DataAccess\IFileSystem;
 use DependencyInjection\Container;
 use DependencyInjection\IProvider;
 
 final class ConfigurationProvider implements IProvider {
-    private const LOCATION = "storage/configuration.php";
+    private const LOCATION = "configuration.php";
 
-    public static function register(Container $container): Container
+    public function register(Container $container): Container
     {
-        return $container->provide(Configuration::class, self::get(...));
+        return $container->provide(Configuration::class, fn() => $this->get($container));
     }
 
-    private static function get(): Configuration
+    private function get(Container $container): Configuration
     {
+        $fs = $container->get(IFileSystem::class);
         /** @var array<string, string> $config */
-        $config = require self::LOCATION;
+        $config = $fs->require(self::LOCATION);
         return new Configuration(
             $config["authUsername"] ?: "",
             $config["authPassword"] ?: ""

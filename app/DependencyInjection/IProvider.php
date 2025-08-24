@@ -2,5 +2,5 @@
 namespace DependencyInjection;
 
 interface IProvider {
-    public static function register(Container $container): Container;
+    public function register(Container $container): Container;
 }
