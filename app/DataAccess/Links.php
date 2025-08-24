@@ -7,6 +7,7 @@ final class Links
     public function __construct(
         private array $entries,
         private readonly string $location,
+        private readonly IFileSystem $fs,
     ) {}
 
     public function get(string $link): ?string
@@ -30,7 +31,7 @@ final class Links
 
     public function save(): void
     {
-        file_put_contents($this->location, serialize($this->entries));
+        $this->fs->set($this->location, serialize($this->entries));
     }
 
     /** @return array<string, string> $entries */

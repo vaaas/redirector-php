@@ -14,9 +14,9 @@ final class Response
     ) {
     }
 
-    public static function redirect(string $to): Response
+    public static function redirect(string $to, string $body = ''): Response
     {
-        return new Response(302, ["Location" => $to], "");
+        return new Response(302, ["Location" => $to], $body);
     }
 
     public static function serve(Response $response): void

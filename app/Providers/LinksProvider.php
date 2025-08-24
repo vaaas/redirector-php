@@ -18,6 +18,6 @@ final class LinksProvider implements IProvider {
         $fs = $container->get(IFileSystem::class);
         /** @var array<string, string> $entries */
         $entries = unserialize($fs->get(self::LOCATION) ?: "") ?: [];
-        return new Links($entries, self::LOCATION);
+        return new Links($entries, self::LOCATION, $fs);
     }
 }

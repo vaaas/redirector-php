@@ -1,7 +1,7 @@
 <?php
 namespace Features\Admin;
 
-use Exception;
+use Http\Errors\BadRequest;
 use Http\IRequest;
 
 /** @immutable */
@@ -17,7 +17,7 @@ final class AddLinkRequest
         $from = $request->post("from");
         $to = $request->post("to");
         if (!$from || !$to) {
-            throw new Exception();
+            throw new BadRequest();
         }
         return new self(trim($from), trim($to));
     }

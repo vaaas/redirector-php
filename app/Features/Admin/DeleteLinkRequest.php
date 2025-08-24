@@ -1,7 +1,7 @@
 <?php
 namespace Features\Admin;
 
-use Exception;
+use Http\Errors\BadRequest;
 use Http\IRequest;
 
 /** @immutable */
@@ -13,7 +13,7 @@ final class DeleteLinkRequest
     {
         $entry = $request->post("entry");
         if (!$entry) {
-            throw new Exception();
+            throw new BadRequest();
         }
         return new self(trim($entry));
     }

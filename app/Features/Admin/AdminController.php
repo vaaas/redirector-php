@@ -5,6 +5,7 @@ use DataAccess\Links;
 use Exception;
 use Features\Admin\Presentation\AdminPanel\AdminPanel;
 use Http\BasicAuth;
+use Http\Errors\BadRequest;
 use Http\IRequest;
 use Http\Response;
 use Throwable;
@@ -27,16 +28,12 @@ final class AdminController
     {
         $this->auth->authorise($request);
 
-        try {
-            if ($request->query("add") === "") {
-                $this->add($request);
-            } elseif ($request->query("delete") === "") {
-                $this->delete($request);
-            } else {
-                throw new Exception();
-            }
-        } catch (Throwable $error) {
-            error_log($error->getMessage());
+        if ($request->query("add") === "") {
+            $this->add($request);
+        } elseif ($request->query("delete") === "") {
+            $this->delete($request);
+        } else {
+            throw new BadRequest();
         }
         return Response::redirect("/");
     }
