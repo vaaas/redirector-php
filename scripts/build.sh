@@ -1,33 +1,28 @@
 #!/bin/sh
 set -e
 
-name=redirector-php
-build=/tmp/build
-timestamp=$(date '+%s')
+alpine=https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/x86_64/alpine-minirootfs-3.22.2-x86_64.tar.gz
+php=php84
 
-package() {
-  dirname=$build/"$name"_"$timestamp"_amd64
-  mkdir -p $dirname/DEBIAN $dirname/srv/$name/storage
-  cp -r etc/Caddyfile index.php app $dirname/srv/$name
-  chmod 755 $dirname/DEBIAN
+mkdir      container
 
-  cat << EOF > $dirname/DEBIAN/control
-Package: $name
-Version: $timestamp
-Architecture: musl-linux-amd64
-Maintainer: Vasileios Pasialiokis <vas@tsuku.ro>
-Description: url redirect service (link shortener)
-EOF
+echo       'Downloading alpine'
+curl       $alpine > alpine.tar.gz
+tar -xf    alpine.tar.gz -C container
 
-  cat << EOF > $dirname/DEBIAN/postinst
-#!/bin/sh
-chown -R php /srv/$name
-EOF
-  chmod +x $dirname/DEBIAN/postinst
+echo       'Installing packages'
+cp         /etc/resolv.conf container/etc/resolv.conf
+chroot     container apk add $php-fpm
+rm         container/etc/resolv.conf
 
-  dpkg-deb --build --root-owner-group $dirname
-}
+echo       'Copying files'
+mkdir -p   container/app \
+           container/app/storage
+cp -r      src/*  \
+           assets \
+           container/app
+cp         etc/php-fpm.conf \
+           container/etc/$php/php-fpm.conf
 
-mkdir -p $build
-package
-cp $build/*deb .
+echo       'Squashing'
+mksquashfs container container.squashfs

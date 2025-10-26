@@ -1,0 +1,8 @@
+#!/bin/sh
+self=/srv/redirector
+exec systemd-nspawn                   \
+    -i $self/container.squashfs       \
+    -M redirector                     \
+    --bind $self/storage:/app/storage \
+    --chdir /                         \
+    /usr/sbin/php-fpm84 -R

@@ -6,7 +6,7 @@ then USER=root
 fi
 
 if test -z "$DOMAIN"
-then DOMAIN=sexualise.it
+then exit 1
 fi
 
 if test -z "$PORT"

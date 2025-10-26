@@ -1,0 +1,8 @@
+[Unit]
+Description=redirector
+
+[Service]
+ExecStart=/srv/redirector/entrypoint.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -13,9 +13,15 @@ jobs:
     steps:
       - name: check out
         uses: actions/checkout@v4
+
       - name: build
         shell: bash
-        run: sudo ./scripts/build.sh
+        run: sudo ./run build:prod
+
+      - name: package
+        shell: bash
+        run: ./run package
+
       - name: install secrets
         shell: bash
         env:
@@ -27,10 +33,11 @@ jobs:
           echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 700 ~/.ssh
           chmod 600 ~/.ssh/*
+
       - name: deploy
         shell: bash
         env:
           DOMAIN: ${{vars.DOMAIN}}
           USER: ${{vars.USER}}
           PORT: ${{vars.PORT}}
-        run: ./scripts/deploy.sh
+        run: ./run deploy

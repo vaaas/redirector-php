@@ -1,19 +1,19 @@
 #!/bin/sh
+set -e
 
-tag=redirector-php
+tag=redirector
 
 case $1 in
-  build)
-    podman build -t $tag -f Containerfile.dev .
-    ;;
+  build)      podman build -t $tag -f Containerfile.dev . ;;
+  build:prod) . scripts/build.sh ;;
+  package)    . scripts/package.sh ;;
+  deploy)     . scripts/deploy.sh ;;
+  shell)      podman run --volume ./:/opt/app -i -t $tag /bin/bash ;;
 
   dev)
     podman run --volume ./:/opt/app --env COMPOSER_ALLOW_SUPERUSER=1 -p 8000:8000 -i -t $tag /usr/bin/composer run-script dev
     ;;
 
-  shell)
-    podman run --volume ./:/opt/app -i -t $tag /bin/bash
-    ;;
 
   composer)
     shift 1
