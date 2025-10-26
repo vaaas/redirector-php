@@ -18,8 +18,8 @@ rm         container/etc/resolv.conf
 echo       'Copying files'
 mkdir -p   container/app \
            container/app/storage
-cp -r      src/*  \
-           assets \
+cp -r      app       \
+           index.php \
            container/app
 cp         etc/php-fpm.conf \
            container/etc/$php/php-fpm.conf
