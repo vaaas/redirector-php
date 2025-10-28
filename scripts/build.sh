@@ -23,3 +23,6 @@ cp -r      app       \
            container/app
 cp         etc/php-fpm.conf \
            container/etc/$php/php-fpm.conf
+
+echo       'fixing permissions'
+chmod -R   o+r container
