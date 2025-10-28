@@ -23,6 +23,3 @@ cp -r      app       \
            container/app
 cp         etc/php-fpm.conf \
            container/etc/$php/php-fpm.conf
-
-echo       'Squashing'
-mksquashfs container container.squashfs

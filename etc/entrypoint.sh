@@ -1,7 +1,7 @@
 #!/bin/sh
 self=/srv/redirector
 exec systemd-nspawn                   \
-    -i $self/container.squashfs       \
+    -D $self/container                \
     -M redirector                     \
     --bind $self/storage:/app/storage \
     --chdir /                         \

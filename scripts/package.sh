@@ -8,7 +8,7 @@ dirname="$name"_"$timestamp"_amd64
 mkdir -p  $dirname/DEBIAN             \
           $dirname/etc/systemd/system \
           $dirname/srv/$name/storage
-mv        container.squashfs $dirname/srv/$name
+mv        container $dirname/srv/$name
 cp        etc/entrypoint.sh $dirname/srv/$name
 cp        etc/Caddyfile $dirname/srv/$name
 cp        etc/redirector.service \
